@@ -1,0 +1,25 @@
+﻿<Window x:Class="Client.Windows.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client.Windows"
+        mc:Ignorable="d"
+        Title="StartWindow" MinHeight="450" MinWidth="800" Style="{StaticResource DefaultWindowStyle}">
+    <Viewbox Margin="10">
+        <Border Style="{StaticResource BorderStyle}" Margin="20">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="50">
+                <TextBlock Text="Реєстрація" Style="{StaticResource MainTextBlock}"/>
+                <TextBlock Style="{StaticResource DefaultTextBlock}">Введіть ваше ім'я:</TextBlock>
+                <TextBox x:Name="userNameTB" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <TextBlock Style="{StaticResource DefaultTextBlock}">Виберіть ваше фото:</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="avatarPathTB" Width="100" Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <Button Width="50" Click="Button_Click" Style="{StaticResource ButtonStyle}">...</Button>
+                </StackPanel>
+
+                <Button x:Name="joinBT" Click="joinBT_Click" Style="{StaticResource ButtonStyle}">Приєднатися</Button>
+            </StackPanel>
+        </Border>
+    </Viewbox>
+</Window>
