@@ -15,10 +15,13 @@ namespace Client.Services
 {
     public class ChatService
     {
+        // Підключення до SignalR-хабу.
         private readonly HubConnection _hubConnection;
 
+        // Колекція повідомлень, яка спостерігається для автоматичного оновлення інтерфейсу.
         public ObservableCollection<ChatMessage> Messages { get; } = new ObservableCollection<ChatMessage>();
 
+        // Конструктор класу, який встановлює підключення до SignalR-хабу.
         public ChatService(string hubUrl)
         {
             _hubConnection = new HubConnectionBuilder()
@@ -56,11 +59,12 @@ namespace Client.Services
             });
         }
 
+        // Асинхронне підключення до SignalR-хабу.
         public async Task ConnectAsync(string user, string profilePictureUrl)
         {
             try
             {
-                await _hubConnection.StartAsync();
+                await _hubConnection.StartAsync(); // Запуск підключення до хабу.
                 await _hubConnection.InvokeAsync("SendMessage", user, "Підключено до сервера SignalR.", profilePictureUrl);
             }
             catch (Exception ex)
@@ -74,6 +78,7 @@ namespace Client.Services
             }
         }
 
+        // Асинхронна відправка текстового повідомлення.
         public async Task SendMessageAsync(string user, string message, string profilePictureUrl)
         {
             if (_hubConnection.State == HubConnectionState.Connected)
@@ -103,6 +108,7 @@ namespace Client.Services
             }
         }
 
+        // Асинхронна відправка зображення у вигляді Base64.
         public async Task SendImageAsync(string user, string base64Image, string profilePictureUrl)
         {
             if (_hubConnection.State == HubConnectionState.Connected)
@@ -132,6 +138,7 @@ namespace Client.Services
             }
         }
 
+        // Конвертує зображення у форматі Base64 у BitmapImage.
         private BitmapImage ConvertBase64ToBitmapImage(string base64String)
         {
             byte[] imageBytes = Convert.FromBase64String(base64String);
